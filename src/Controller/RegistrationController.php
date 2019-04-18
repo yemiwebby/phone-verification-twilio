@@ -87,16 +87,6 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('verify_page');
     }
 
-    public function checkVerificationCodeStatus()
-    {
-        $options = [
-            'query' => ['uuid' => 'a98b3720-1daf-0137-8014-12c2f5542216'],
-            'headers' => ["X-Authy-API-Key" => getenv('TWILIO_AUTHY_API_KEY')]
-        ];
-        $obj = $this->apiService->checkVerificationCodeStatus($options);
-    }
-
-
     function updateDatabase($object)
     {
         $this->entityManager->persist($object);

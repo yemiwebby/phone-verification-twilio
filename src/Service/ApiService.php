@@ -2,27 +2,10 @@
 
 namespace App\Service;
 
-
 use GuzzleHttp\Client;
 
 class ApiService
 {
-
-    public function checkVerificationCodeStatus($options)
-    {
-        $client = new Client();
-        $response = $client->get(getenv('TWILIO_AUTHY_BASE_URL').'status', $options);
-        $res_json = json_decode($response->getBody()->getContents());
-        return $res_json;
-    }
-
-    public function verifyCodeAndSaveUser($options)
-    {
-        $client = new Client();
-        $response = $client->get(getenv('TWILIO_AUTHY_BASE_URL').'check', $options);
-        $res_json = json_decode($response->getBody()->getContents());
-        return $res_json;
-    }
 
     public function sendVerificationCode($options)
     {
@@ -31,6 +14,12 @@ class ApiService
         $res_json = json_decode($response->getBody()->getContents());
         return $res_json;
     }
-
-
+    
+    public function verifyCodeAndSaveUser($options)
+    {
+        $client = new Client();
+        $response = $client->get(getenv('TWILIO_AUTHY_BASE_URL').'check', $options);
+        $res_json = json_decode($response->getBody()->getContents());
+        return $res_json;
+    }
 }
